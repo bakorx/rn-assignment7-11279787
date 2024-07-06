@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "shaddas",
-    "slug": "shaddas",
+    "name": "clothingApp",
+    "slug": "clothingApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
