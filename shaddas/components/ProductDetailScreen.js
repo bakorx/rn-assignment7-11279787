@@ -52,7 +52,9 @@ const ProductDetailScreen = () => {
         <View style={styles.shipping}>
             <Image source={require('../assets/Shipping.png')} style={styles.shippingIcon} />
             <Text style={styles.shippingText}>Free Flat Rate Shipping</Text>
-            <Text style={styles.shippingDate}>Estimated to be delivered on 09/11/2021 - 12/11/2021.</Text>
+            <Text style={styles.shippingDate}>Estimated to be delivered on 09/11/2021 - 12/11/2021.
+                
+            </Text>
         </View>
         <TouchableOpacity style={styles.addButton}>
             <Text style={styles.addButtonText}>ADD TO BASKET</Text>
