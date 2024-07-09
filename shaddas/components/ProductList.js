@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native'; 
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/actions';
@@ -8,14 +8,19 @@ const products = [
   { id: 2, name: 'Black', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress2.png') },
   { id: 3, name: 'Church Wear', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
   { id: 4, name: 'Lamerei', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress4.png') },
-  { id: 4, name: '21WN', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress5.png') },
-  { id: 4, name: 'Lopo', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress6.png') },
-  { id: 4, name: '21wn', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress7.png') },
-  { id: 3, name: 'Lame', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
+  { id: 5, name: '21WN', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress5.png') },
+  { id: 6, name: 'Lopo', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress6.png') },
+  { id: 7, name: '21wn', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress7.png') },
+  { id: 8, name: 'Lame', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
 ];
 
 const ProductList = ({ navigation }) => {
+  const [isMenuVisible, setMenuVisible] = useState(false);
   const dispatch = useDispatch();
+
+  const toggleMenu = () => {
+    setMenuVisible(!isMenuVisible);
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.product}>
@@ -33,9 +38,22 @@ const ProductList = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      {isMenuVisible && (
+        <View style={styles.menu}>
+          <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
+            <Text style={styles.closeButtonText}>X</Text>
+          </TouchableOpacity>
+          <Text style={styles.menuItem}>Store</Text>
+          <Text style={styles.menuItem}>Locations</Text>
+          <Text style={styles.menuItem}>Blog</Text>
+          <Text style={styles.menuItem}>Jewelry</Text>
+          <Text style={styles.menuItem}>Electronic</Text>
+          <Text style={styles.menuItem}>Clothing</Text>
+        </View>
+      )}
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.menuButton} onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity style={styles.menuButton} onPress={toggleMenu}>
             <Image source={require('../assets/Menu.png')} style={styles.icon} />
           </TouchableOpacity>
           <Image source={require('../assets/Logo.png')} style={styles.logo} />
@@ -74,7 +92,7 @@ const ProductList = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff', 
+    backgroundColor: '#fff',
   },
   container: {
     flex: 1,
@@ -115,7 +133,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Arial', 
+    fontFamily: 'Arial',
   },
   titleIcons: {
     flexDirection: 'row',
@@ -178,6 +196,28 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ff6347',
+  },
+  menu: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#fff',
+    zIndex: 1000,
+    padding: 20,
+  },
+  closeButton: {
+    alignSelf: 'flex-end',
+    padding: 10,
+  },
+  closeButtonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  menuItem: {
+    fontSize: 18,
+    marginVertical: 10,
   },
 });
 
