@@ -35,7 +35,7 @@ const ProductList = ({ navigation }) => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.menuButton}>
+          <TouchableOpacity style={styles.menuButton} onPress={() => navigation.openDrawer()}>
             <Image source={require('../assets/Menu.png')} style={styles.icon} />
           </TouchableOpacity>
           <Image source={require('../assets/Logo.png')} style={styles.logo} />
