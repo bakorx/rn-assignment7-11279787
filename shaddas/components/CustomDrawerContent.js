@@ -1,67 +1,51 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const CustomDrawerContent = (props) => {
+const CustomDrawerContent = ({ navigation }) => {
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.closeButton} onPress={() => props.navigation.closeDrawer()}>
-          <Text style={styles.closeButtonText}>X</Text>
-        </TouchableOpacity>
-        <Text style={styles.header}>ERIC ATSU</Text>
-        <DrawerItemList {...props} />
-        <TouchableOpacity style={styles.menuItem} onPress={() => {}}>
-          <Text style={styles.menuItemText}>Store</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => {}}>
-          <Text style={styles.menuItemText}>Locations</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => {}}>
-          <Text style={styles.menuItemText}>Blog</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => {}}>
-          <Text style={styles.menuItemText}>Jewelry</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => {}}>
-          <Text style={styles.menuItemText}>Electronic</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.menuItem} onPress={() => {}}>
-          <Text style={styles.menuItemText}>Clothing</Text>
-        </TouchableOpacity>
-      </View>
-    </DrawerContentScrollView>
+    <View style={styles.drawerContent}>
+      <TouchableOpacity style={styles.closeButton} onPress={() => navigation.closeDrawer()}>
+        <Text style={styles.closeButtonText}>X</Text>
+      </TouchableOpacity>
+      <Text style={styles.drawerTitle}>Kwame Bakor</Text>
+      <View style={styles.divider} />
+      <Text style={styles.menuItem} onPress={() => navigation.navigate('Store')}>Store</Text>
+      <Text style={styles.menuItem} onPress={() => navigation.navigate('Locations')}>Locations</Text>
+      <Text style={styles.menuItem} onPress={() => navigation.navigate('Blog')}>Blog</Text>
+      <Text style={styles.menuItem} onPress={() => navigation.navigate('Jewelry')}>Jewelry</Text>
+      <Text style={styles.menuItem} onPress={() => navigation.navigate('Electronic')}>Electronic</Text>
+      <Text style={styles.menuItem} onPress={() => navigation.navigate('Clothing')}>Clothing</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  drawerContent: {
     flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 20,
+    padding: 20,
     backgroundColor: '#fff',
   },
   closeButton: {
-    alignSelf: 'flex-end',
-    padding: 10,
+    alignSelf: 'flex-start',
   },
   closeButtonText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '',
   },
-  header: {
-    fontSize: 24,
+  drawerTitle: {
+    fontSize: 18,
     fontWeight: 'bold',
+    marginVertical: 20,
+  },
+  divider: {
+    width: '50%',
+    height: 1,
+    backgroundColor: '#ccc',
     marginBottom: 20,
-    textAlign: 'center',
   },
   menuItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-  },
-  menuItemText: {
-    fontSize: 18,
+    fontSize: 16,
+    marginVertical: 10,
   },
 });
 
