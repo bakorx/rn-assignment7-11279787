@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native'; 
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/actions';
 
@@ -15,10 +15,15 @@ const products = [
 ];
 
 const ProductList = ({ navigation }) => {
+  const [isMenuVisible, setMenuVisible] = useState(false);
   const dispatch = useDispatch();
 
+  const toggleMenu = () => {
+    setMenuVisible(!isMenuVisible);
+  };
+
   const renderItem = ({ item }) => (
-    <View style={styles.product}>
+    <TouchableOpacity style={styles.product} onPress={() => navigation.navigate('ProductDetail', { product: item })}>
       <View style={styles.imageContainer}>
         <Image source={item.image} style={styles.image} />
         <TouchableOpacity style={styles.addButton} onPress={() => dispatch(addItemToCart(item))}>
@@ -28,14 +33,14 @@ const ProductList = ({ navigation }) => {
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.description}>{item.description}</Text>
       <Text style={styles.price}>${item.price}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.menuButton} onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity style={styles.menuButton} onPress={toggleMenu}>
             <Image source={require('../assets/Menu.png')} style={styles.icon} />
           </TouchableOpacity>
           <Image source={require('../assets/Logo.png')} style={styles.logo} />

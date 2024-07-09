@@ -2,13 +2,16 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import ProductList from './components/ProductList';
 import Checkout from './components/Checkout';
 import CustomDrawerContent from './components/CustomDrawerContent';
-import { Ionicons } from '@expo/vector-icons'; 
+import ProductDetailScreen from './components/ProductDetailScreen';
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
 const TabNavigator = () => (
   <Tab.Navigator
@@ -42,6 +45,21 @@ const TabNavigator = () => (
   </Tab.Navigator>
 );
 
+const StackNavigator = () => (
+  <Stack.Navigator initialRouteName="TabNavigator">
+    <Stack.Screen
+      name="TabNavigator"
+      component={TabNavigator}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="ProductDetail"
+      component={ProductDetailScreen}
+      options={{ headerShown: false }}
+    />
+  </Stack.Navigator>
+);
+
 const AppNavigator = () => (
   <NavigationContainer>
     <Drawer.Navigator
@@ -54,7 +72,7 @@ const AppNavigator = () => (
         },
       }}
     >
-      <Drawer.Screen name="Home" component={TabNavigator} options={{ headerShown: false }} />
+      <Drawer.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
     </Drawer.Navigator>
   </NavigationContainer>
 );
