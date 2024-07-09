@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native'; 
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/actions';
@@ -15,12 +15,7 @@ const products = [
 ];
 
 const ProductList = ({ navigation }) => {
-  const [isMenuVisible, setMenuVisible] = useState(false);
   const dispatch = useDispatch();
-
-  const toggleMenu = () => {
-    setMenuVisible(!isMenuVisible);
-  };
 
   const renderItem = ({ item }) => (
     <View style={styles.product}>
@@ -38,22 +33,9 @@ const ProductList = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      {isMenuVisible && (
-        <View style={styles.menu}>
-          <TouchableOpacity style={styles.closeButton} onPress={toggleMenu}>
-            <Text style={styles.closeButtonText}>X</Text>
-          </TouchableOpacity>
-          <Text style={styles.menuItem}>Store</Text>
-          <Text style={styles.menuItem}>Locations</Text>
-          <Text style={styles.menuItem}>Blog</Text>
-          <Text style={styles.menuItem}>Jewelry</Text>
-          <Text style={styles.menuItem}>Electronic</Text>
-          <Text style={styles.menuItem}>Clothing</Text>
-        </View>
-      )}
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.menuButton} onPress={toggleMenu}>
+          <TouchableOpacity style={styles.menuButton} onPress={() => navigation.openDrawer()}>
             <Image source={require('../assets/Menu.png')} style={styles.icon} />
           </TouchableOpacity>
           <Image source={require('../assets/Logo.png')} style={styles.logo} />
@@ -196,28 +178,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#ff6347',
-  },
-  menu: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#fff',
-    zIndex: 1000,
-    padding: 20,
-  },
-  closeButton: {
-    alignSelf: 'flex-end',
-    padding: 10,
-  },
-  closeButtonText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  menuItem: {
-    fontSize: 18,
-    marginVertical: 10,
   },
 });
 
