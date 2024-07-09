@@ -68,7 +68,7 @@ const AppNavigator = () => (
         drawerType: 'back',
         overlayColor: 'transparent',
         drawerStyle: {
-          width: '60%', // Adjust this to control the width of the drawer
+          width: '60%', 
         },
       }}
     >
