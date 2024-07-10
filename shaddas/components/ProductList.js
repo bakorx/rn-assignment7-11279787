@@ -27,7 +27,7 @@ const ProductList = ({ navigation }) => {
       <View style={styles.imageContainer}>
         <Image source={item.image} style={styles.image} />
         <TouchableOpacity style={styles.addButton} onPress={() => dispatch(addItemToCart(item))}>
-          <Text style={styles.addButtonText}>+</Text>
+          <Image source={require('../assets/add_circle.png')} style={styles.addButtonImage} />
         </TouchableOpacity>
       </View>
       <Text style={styles.name}>{item.name}</Text>
@@ -163,12 +163,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#000',
   },
-  addButtonText: {
-    color: '#000',
-    fontSize: 24,
+  addButtonImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
   },
   name: {
     fontSize: 16,
