@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import BasketContext from '../context/BasketContext';
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../redux/actions'; 
 
 const ProductDetailScreen = () => {
   const route = useRoute();
   const { product } = route.params;
+  const dispatch = useDispatch();
+
+  const handleAddToBasket = () => {
+    dispatch(addItemToCart(product));
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
-        <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.header}>
-            <TouchableOpacity style={styles.menuButton}>
+          <TouchableOpacity style={styles.menuButton}>
             <Image source={require('../assets/Menu.png')} style={styles.icon} />
-            </TouchableOpacity>
-            <Image source={require('../assets/Logo.png')} style={styles.logo} />
-            <View style={styles.headerIcons}>
+          </TouchableOpacity>
+          <Image source={require('../assets/Logo.png')} style={styles.logo} />
+          <View style={styles.headerIcons}>
             <TouchableOpacity style={styles.headerButton}>
-                <Image source={require('../assets/Search.png')} style={styles.icon} />
+              <Image source={require('../assets/Search.png')} style={styles.icon} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.headerButton}>
-                <Image source={require('../assets/shoppingBag.png')} style={styles.icon} />
+              <Image source={require('../assets/shoppingBag.png')} style={styles.icon} />
             </TouchableOpacity>
-            </View>
+          </View>
         </View>
         <Image source={product.image} style={styles.productImage} />
         <Text style={styles.productName}>{product.name}</Text>
@@ -29,50 +37,55 @@ const ProductDetailScreen = () => {
         <Text style={styles.productPrice}>${product.price}</Text>
         <Text style={styles.productMaterials}>MATERIALS</Text>
         <Text style={styles.productMaterialsText}>
-            We work with monitoring programmes to ensure compliance with safety, health and quality standards for our products.
+          We work with monitoring programmes to ensure compliance with safety, health and quality standards for our products.
         </Text>
         <View style={styles.materialIcons}>
-            <View style={styles.materialIconRow}>
+          <View style={styles.materialIconRow}>
             <Image source={require('../assets/Do Not Bleach.png')} style={styles.materialIcon} />
             <Text style={styles.materialIconText}>Do not use bleach</Text>
-            </View>
-            <View style={styles.materialIconRow}>
+          </View>
+          <View style={styles.materialIconRow}>
             <Image source={require('../assets/Do Not Tumble Dry.png')} style={styles.materialIcon} />
             <Text style={styles.materialIconText}>Do not tumble dry</Text>
-            </View>
-            <View style={styles.materialIconRow}>
+          </View>
+          <View style={styles.materialIconRow}>
             <Image source={require('../assets/Do Not Wash.png')} style={styles.materialIcon} />
             <Text style={styles.materialIconText}>Dry clean with tetrachloroethylene</Text>
-            </View>
-            <View style={styles.materialIconRow}>
+          </View>
+          <View style={styles.materialIconRow}>
             <Image source={require('../assets/Iron.png')} style={styles.materialIcon} />
             <Text style={styles.materialIconText}>Iron at a maximum of 110°C/230°F</Text>
-            </View>
+          </View>
         </View>
         <View style={styles.shipping}>
-            <Image source={require('../assets/Shipping.png')} style={styles.shippingIcon} />
+          <Image source={require('../assets/Shipping.png')} style={styles.shippingIcon} />
+          <View style={styles.shippingDetails}>
             <Text style={styles.shippingText}>Free Flat Rate Shipping</Text>
-            <Text style={styles.shippingDate}>Estimated to be delivered on 09/11/2021 - 12/11/2021.
-                
-            </Text>
+            <Text style={styles.shippingDate}>Estimated to be delivered on 09/11/2021 - 12/11/2021.</Text>
+          </View>
         </View>
-        <TouchableOpacity style={styles.addButton}>
-            <Text style={styles.addButtonText}>ADD TO BASKET</Text>
-        </TouchableOpacity>
-        </ScrollView>
+      </ScrollView>
+      <TouchableOpacity style={styles.addButton} onPress={handleAddToBasket}>
+        <View style={styles.addButtonContent}>
+          <Image source={require('../assets/Plus.png')} style={styles.plusIcon} />
+          <Text style={styles.addButtonText}>ADD TO BASKET</Text>
+          <Image source={require('../assets/Heart.png')} style={styles.heartIcon} />
+        </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-    safeArea: {
-        flex: 1,
-        backgroundColor: '#fff',
-      },
-      
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingBottom: 100, // Ensures content doesn't overlap with the add to basket button
   },
   header: {
     flexDirection: 'row',
@@ -156,6 +169,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginRight: 10,
   },
+  shippingDetails: {
+    flex: 1,
+  },
   shippingText: {
     fontSize: 16,
   },
@@ -165,14 +181,35 @@ const styles = StyleSheet.create({
   },
   addButton: {
     backgroundColor: '#000',
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    justifyContent: 'center',
     alignItems: 'center',
-    margin: 10,
-    borderRadius: 5,
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  addButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  plusIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    marginRight: 10,
   },
   addButtonText: {
     color: '#fff',
     fontSize: 16,
+    marginRight: 10,
+  },
+  heartIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
   },
 });
 

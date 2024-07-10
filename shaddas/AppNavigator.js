@@ -8,6 +8,7 @@ import Checkout from './components/Checkout';
 import CustomDrawerContent from './components/CustomDrawerContent';
 import ProductDetailScreen from './components/ProductDetailScreen';
 import { Ionicons } from '@expo/vector-icons';
+import { BasketProvider } from './context/BasketContext';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -61,20 +62,22 @@ const StackNavigator = () => (
 );
 
 const AppNavigator = () => (
-  <NavigationContainer>
-    <Drawer.Navigator
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-      screenOptions={{
-        drawerType: 'back',
-        overlayColor: 'transparent',
-        drawerStyle: {
-          width: '60%', 
-        },
-      }}
-    >
-      <Drawer.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
-    </Drawer.Navigator>
-  </NavigationContainer>
+  <BasketProvider>
+    <NavigationContainer>
+      <Drawer.Navigator
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+        screenOptions={{
+          drawerType: 'back',
+          overlayColor: 'transparent',
+          drawerStyle: {
+            width: '60%', 
+          },
+        }}
+      >
+        <Drawer.Screen name="Home" component={StackNavigator} options={{ headerShown: false }} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  </BasketProvider>
 );
 
 export default AppNavigator;
