@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/actions';
 
-const products = [
-  { id: 1, name: 'Office Wear', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress1.png') },
-  { id: 2, name: 'Black', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress2.png') },
-  { id: 3, name: 'Church Wear', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
-  { id: 4, name: 'Lamerei', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress4.png') },
-  { id: 5, name: '21WN', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress5.png') },
-  { id: 6, name: 'Lopo', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress6.png') },
-  { id: 7, name: '21wn', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress7.png') },
-  { id: 8, name: 'Lame', description: 'Reversible angora cardigan', price: 120, image: require('../assets/dress3.png') },
-];
-
 const ProductList = ({ navigation }) => {
+  const [products, setProducts] = useState([]);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = () => {
+    const url = 'https://fakestoreapi.com/products';
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
@@ -25,12 +33,12 @@ const ProductList = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.product} onPress={() => navigation.navigate('ProductDetail', { product: item })}>
       <View style={styles.imageContainer}>
-        <Image source={item.image} style={styles.image} />
+        <Image source={{ uri: item.image }} style={styles.image} />
         <TouchableOpacity style={styles.addButton} onPress={() => dispatch(addItemToCart(item))}>
           <Image source={require('../assets/add_circle.png')} style={styles.addButtonImage} />
         </TouchableOpacity>
       </View>
-      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.name}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
       <Text style={styles.price}>${item.price}</Text>
     </TouchableOpacity>
