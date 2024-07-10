@@ -31,5 +31,5 @@ Data Storage
 AsyncStorage
 AsyncStorage is used to store the cart items locally on the device. This ensures that the cart persists across app sessions.
 
-Saving to AsyncStorage:
+## Saving to AsyncStorage:
 Whenever an item is added to or removed from the cart, the updated cart state is saved to AsyncStorage.
