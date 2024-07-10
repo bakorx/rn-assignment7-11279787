@@ -46,3 +46,5 @@ Whenever an item is added to or removed from the cart, the updated cart state is
 
 ## Menu Bar
 ![menu bar](<shaddas/assets/menu screenshot.jpg>)
+
+### swipe right the menu bar in the product productlist page to open menu, click or swipe left to return the menu. After openeing the product details, swipe from left to right ro return to home page
