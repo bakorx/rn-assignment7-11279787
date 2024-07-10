@@ -33,16 +33,16 @@ AsyncStorage is used to store the cart items locally on the device. This ensures
 #### Saving to AsyncStorage:
 Whenever an item is added to or removed from the cart, the updated cart state is saved to AsyncStorage.
 
-## Screenshots 
-### Product List Screen
+# Screenshots 
+## Product List Screen
 ![products](<shaddas/assets/products list screenshot.jpg>)
 
-### Product Details Screen
+## Product Details Screen
 ![details 1](<shaddas/assets/product details 1.jpg>)
 ![details 2](<shaddas/assets/product details 2.jpg>)
 
-### Checkout Screen
+## Checkout Screen
 ![checkout](<shaddas/assets/checkout screenshot.jpg>)
 
-### Menu Bar
+## Menu Bar
 ![menu bar](<shaddas/assets/menu screenshot.jpg>)
