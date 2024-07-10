@@ -9,9 +9,9 @@ const Checkout = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.product}>
-      <Image source={item.image} style={styles.image} />
+      <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.productDetails}>
-        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.name}>{item.title}</Text>
         <Text style={styles.description}>{item.description}</Text>
         <Text style={styles.price}>${item.price}</Text>
       </View>

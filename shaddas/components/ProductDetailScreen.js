@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import BasketContext from '../context/BasketContext';
 import { useDispatch } from 'react-redux';
 import { addItemToCart } from '../redux/actions'; 
 
@@ -31,8 +30,8 @@ const ProductDetailScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <Image source={product.image} style={styles.productImage} />
-        <Text style={styles.productName}>{product.name}</Text>
+        <Image source={{ uri: product.image }} style={styles.productImage} />
+        <Text style={styles.productName}>{product.title}</Text>
         <Text style={styles.productDescription}>{product.description}</Text>
         <Text style={styles.productPrice}>${product.price}</Text>
         <Text style={styles.productMaterials}>MATERIALS</Text>
