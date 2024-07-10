@@ -24,12 +24,11 @@ components
 ProductList.js: Fetches and displays a list of products from an external API.
 ProductDetail.js: Displays detailed information about a selected product and allows adding it to the cart.
 Cart.js: Displays items in the cart and allows removing items.
-api
-index.js: Contains the function to fetch products from the external API.
+api.
 App.js: Configures the navigation and sets up the Redux provider.
-Data Storage
-AsyncStorage
+## Data Storage
+#### AsyncStorage
 AsyncStorage is used to store the cart items locally on the device. This ensures that the cart persists across app sessions.
 
-## Saving to AsyncStorage:
+#### Saving to AsyncStorage:
 Whenever an item is added to or removed from the cart, the updated cart state is saved to AsyncStorage.
